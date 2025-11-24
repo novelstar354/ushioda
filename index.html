@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Art Youth Academia — プロフィール</title>
+
+  <style>
+    /* ==========================================
+       パスワードロック画面（娯楽サイト風）
+    =========================================== */
+    body {
+      margin:0;
+      background:#000;
+      color:#fff;
+      font-family:"Noto Sans JP", sans-serif;
+    }
+
+    #lockScreen {
+      position:fixed;
+      inset:0;
+      background:#000;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      z-index:99999;
+    }
+
+    .lockBox {
+      width:90%;
+      max-width:420px;
+      padding:40px 32px;
+      background:rgba(255,255,255,0.05);
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,0.15);
+      backdrop-filter:blur(12px);
+      box-shadow:0 10px 40px rgba(0,0,0,0.8);
+      text-align:center;
+      animation:fadeIn 0.7s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity:0; transform:translateY(20px);}
+      to   {opacity:1; transform:translateY(0);}
+    }
+
+    .lockBox h2 {
+      margin-bottom:12px;
+      color:#e6c07b;
+      font-size:1.5rem;
+    }
+
+    #passInput {
+      width:100%;
+      padding:14px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.3);
+      background:rgba(0,0,0,0.5);
+      font-size:1rem;
+      color:#fff;
+      outline:none;
+      transition:0.25s;
+    }
+    #passInput:focus {
+      border-color:#e6c07b;
+      box-shadow:0 0 10px rgba(230,192,123,0.4);
+    }
+
+    .enterBtn {
+      width:100%;
+      margin-top:18px;
+      padding:12px;
+      background:#e6c07b;
+      border:none;
+      border-radius:10px;
+      font-weight:bold;
+      font-size:1rem;
+      cursor:pointer;
+      transition:0.2s;
+      color:#000;
+    }
+    .enterBtn:hover {
+      background:#f1d08f;
+      transform:translateY(-2px);
+      box-shadow:0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    .err {
+      margin-top:12px;
+      height:22px;
+      color:#ff6b6b;
+      font-size:0.9rem;
+    }
+
+    /* ---- 本文は初期状態で非表示 ---- */
+    #mainContent { display:none; }
+  </style>
+
+  <!-- ▼▼▼ ここからあなたの元CSSそのまま ▼▼▼ -->
+  <style>
+    :root{
+      --bg:#000000;
+      --text:#ffffff;
+      --muted:#cfcfcf;
+      --accent:#e6c07b;
+      --card:#0b0b0b;
+      --radius:14px;
+      font-family:"Noto Sans JP", system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.6;
+      padding:32px;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+    }
+
+    .container{
+      width:100%;
+      max-width:980px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:16px;
+      padding:28px;
+      box-shadow:0 8px 30px rgba(0,0,0,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    header{display:flex;gap:20px;align-items:center}
+    .avatar{width:160px;height:160px;border-radius:12px;overflow:hidden;flex:0 0 160px;background:linear-gradient(135deg,#111,#222);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.04);}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    .title{flex:1}
+    h1{font-size:1.6rem;margin:0 0 6px 0}
+    .sub{color:var(--muted);font-size:0.95rem;margin-bottom:6px}
+    .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;font-size:0.85rem;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:22px;margin-top:20px}
+    .card{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+    .section h2{margin:0 0 10px 0;font-size:1.05rem}
+    .meta{color:var(--muted);font-size:0.95rem}
+    dl{display:grid;grid-template-columns:110px 1fr;row-gap:10px;column-gap:12px}
+    dt{color:var(--muted);font-weight:700}
+    dd{margin:0}
+    .price{font-weight:700;font-size:1.1rem}
+    .contact a{color:var(--accent);text-decoration:none}
+    .donate{display:flex;align-items:center;gap:12px;margin-top:8px}
+    .donate .pill{background:rgba(255,255,255,0.03);padding:8px 10px;border-radius:999px;font-weight:700}
+    footer{margin-top:18px;color:var(--muted);font-size:0.85rem;text-align:center}
+    @media (max-width:880px){
+      .grid{grid-template-columns:1fr;}
+      .avatar{width:120px;height:120px}
+    }
+    .muted{color:var(--muted)}
+    a.button{display:inline-block;padding:10px 14px;border-radius:10px;background:rgba(255,255,255,0.03);text-decoration:none;color:var(--text);border:1px solid rgba(255,255,255,0.02)}
+  </style>
+  <!-- ▲▲▲ 元CSSここまで ▲▲▲ -->
+
+</head>
+
+<body>
+
+  <!-- ============================
+       パスワード画面
+  ============================ -->
+  <div id="lockScreen">
+    <div class="lockBox">
+      <h2>ACCESS LOCKED</h2>
+      <p>パスワードを入力してください。</p>
+
+      <input id="passInput" type="password" placeholder="Password">
+      <button class="enterBtn" onclick="unlock()">ENTER</button>
+      <div class="err" id="errMsg"></div>
+    </div>
+  </div>
+
+  <!-- ============================
+       本文（あなたのサイト内容）
+  ============================ -->
+  <div id="mainContent">
+    <!-- ★ あなたが送ったHTMLを丸ごと入れました ★ -->
+
+    <div class="container" role="main">
+      <header>
+      <div class="avatar" aria-hidden="false">
+        <img src="https://static.wixstatic.com/media/34dfc0_2188606566c94fa6bfcc983260ac5b0d~mv2.jpg/v1/fill/w_400,h_860,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_E1556_JPG.jpg" alt="">
+      </div>
+      <div class="title">
+        <h1>潮田 やすお（Art Youth Academia 代表／講師）</h1>
+        <div class="sub">フィンランド・メソッド × アドラー心理学 × 個別最適化学習 | プレミアム国語授業</div>
+        <div class="tags">
+          <span class="tag">国語教育</span>
+          <span class="tag">個別指導</span>
+          <span class="tag">探究学習</span>
+          <span class="tag">自己肯定感</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div>
+        <section class="card section">
+          <h2>紹介</h2>
+          <p class="meta">茨城県内の私立小中学校での教員経験、私立校や学習塾での指導歴を持つ代表講師。対話を重視した授業で、読解力・表現力・思考力を育てます。</p>
+
+          <h2 style="margin-top:16px">指導方針</h2>
+          <ul class="muted">
+            <li>「今できないだけで、キミができないわけじゃない」を大切にする学習支援</li>
+            <li>個性と好奇心を伸ばす対話型授業</li>
+            <li>探究力と伝達力の育成</li>
+          </ul>
+
+          <h2 style="margin-top:16px">実績</h2>
+          <p class="muted">授業評価アンケートにおいて非常に高い評価（教員・生徒ベースの集計で上位）。詳細は公式ページをご確認ください。</p>
+
+          <h2 style="margin-top:16px">授業内容（例）</h2>
+          <dl>
+            <dt>対象</dt><dd>ゆりかごから墓場まで（個別調整）</dd>
+            <dt>形式</dt><dd>1対1 / オンライン・対面（応相談）</dd>
+            <dt>時間</dt><dd>50分 / 1コマ（要予約）</dd>
+          </dl>
+
+          <h2 style="margin-top:16px">料金・条件</h2>
+          <p class="price">1対1 50分：500円（税込）</p>
+          <p class="muted">入学金・教材費・交通費不要。支払い方法は相談に応じます。</p>
+
+          <h2 style="margin-top:16px">社会貢献</h2>
+          <p class="muted">授業料の99%を児童養護施設やNPO（例：ワールド・ビジョン・ジャパン等）に寄付しています。</p>
+        </section>
+
+        <section class="card section" style="margin-top:16px">
+          <h2>よくある質問</h2>
+          <details class="muted"><summary>授業のキャンセルは？</summary><p class="muted">原則24時間前までにご連絡ください。詳細は個別にご案内します。</p></details>
+          <details class="muted" style="margin-top:8px"><summary>体験授業はある？</summary><p class="muted">初回体験を受け付けています。お問い合わせください。</p></details>
+          <details class="muted"><summary>あなたの名言は？</summary><a href="https://starcorperation.w3spaces.com/player.html">これを見ろ（未完成）</a></details>  
+        </section>
+      </div>
+
+      <aside>
+        <div class="card contact">
+          <h2>連絡先</h2>
+          <dl>
+            <dt>電話</dt><dd><a href="tel:09061454695">090‑6145‑4695</a></dd>
+            <dt>メール</dt><dd><a href="mailto:ayakiri1216@gmail.com">ayakiri1216@gmail.com</a></dd>
+            <dt>所在地</dt><dd class="muted">（詳細はお問い合わせください）</dd>
+          </dl>
+
+          <div style="margin-top:12px">
+            <a class="button" href="#contact">お問い合わせフォームへ</a>
+          </div>
+
+          <div style="margin-top:14px">
+            <div class="muted">授業料の寄付割合</div>
+            <div class="donate">
+              <div class="pill">寄付: 99%</div>
+              <div class="muted">児童養護施設 / NPO 等</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:16px;text-align:center">
+          <h2>予約</h2>
+          <p class="muted">50分の個別授業を予約できます。空き状況はお問い合わせください。</p>
+          <a class="button" href="#book" style="margin-top:8px;display:inline-block">予約する</a>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <h2>詳細リンク</h2>
+          <ul class="muted">
+            <li><a href="https://www.artyouthacademia.com/" target="_blank" rel="noopener" style="color:var(--accent)">公式サイトを見る</a></li>
+            <li><a href="#" style="color:var(--muted)">SNS（準備中）</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+  </div>
+
+  <!-- ============================
+       パスワード判定スクリプト
+  ============================ -->
+  <script>
+    function unlock(){
+      const pw = document.getElementById("passInput").value;
+      const err = document.getElementById("errMsg");
+
+      if(pw === "orangeS@0120"){   // ← パスワード
+        document.getElementById("lockScreen").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+      } else {
+        err.textContent = "パスワードが違います。";
+      }
+    }
+  </script>
+
+</body>
+</html>
